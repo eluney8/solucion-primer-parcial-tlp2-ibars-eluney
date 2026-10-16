@@ -7,6 +7,7 @@ import {
   getMyProjects,
   updateProject,
 } from "../controllers/projects.controller.js";
+
 import { authMiddleware } from "../middlewares/auth.middleware.js";
 import { adminMiddleware } from "../middlewares/admin.middleware.js";
 import { leaderMiddleware } from "../middlewares/leader.middleware.js";
@@ -22,7 +23,7 @@ export const projectRoutes = Router();
 
 // ? Crear un proyecto: requiere sesión iniciada y datos válidos.
 projectRoutes.post(
-  "/projects",
+"/projects",
   authMiddleware,
   createProjectValidation,
   validator,
@@ -30,10 +31,17 @@ projectRoutes.post(
 );
 
 // ? Listar todos los proyectos: solo administrator.
-projectRoutes.get("/projects", authMiddleware, adminMiddleware, getAllProjects);
+projectRoutes.get(
+  "/projects", 
+  authMiddleware, 
+  adminMiddleware, 
+  getAllProjects);
 
 // ? Listar los proyectos del usuario logueado: requiere sesión iniciada.
-projectRoutes.get("/projects/my-projects", authMiddleware, getMyProjects);
+projectRoutes.get(
+  "/projects/my-projects", 
+  authMiddleware, 
+  getMyProjects);
 
 // ? Editar un proyecto: solo su líder y con datos válidos.
 projectRoutes.put(
